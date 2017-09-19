@@ -4,10 +4,45 @@
 <%@ page import="java.io.*" %>
 <%@ page import="java.util.*" %>
 
+<%@ page import="org.apache.commons.fileupload.FileItem" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+
 <%
 
-String n = request.getParameter("name");
 response.setHeader("Access-Control-Allow-Origin","*");
+/* final String UPLOAD_DIRECTORY = "E:/uploads";
+if(ServletFileUpload.isMultipartContent(request)){
+
+    try {
+        List<FileItem> multiparts = new ServletFileUpload(
+                                 new DiskFileItemFactory()).parseRequest(request);
+       
+        for(FileItem item : multiparts){
+            if(!item.isFormField()){
+                String name = new File(item.getName()).getName();
+                item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+            }
+        }
+    
+       //File uploaded successfully
+       request.setAttribute("message", "File Uploaded Successfully");
+    } catch (Exception ex) {
+       request.setAttribute("message", "File Upload Failed due to " + ex);
+    }         
+  
+}else{
+    request.setAttribute("message",
+                        "Sorry this Servlet only handles file upload request");
+}
+
+request.getRequestDispatcher("http://localhost:4200/").forward(request, response);
+*/
+///////////////////////////////////////////"/result.jsp"
+///////////////////////////////////////////
+
+String n = request.getParameter("name");
+ 
 //out.print("E:\\trial\\test.txt for " + n.charAt(1));
 		
 String cmdStart = "notepad.exe";
@@ -19,7 +54,7 @@ openPath.add(cmdStart);
 openPath.add(cmd);
 		
 ProcessBuilder procB = new ProcessBuilder(openPath); // Documents\\Piyush ") ; // && dir /T:W hello.txt");
-System.out.println(procB.directory());
+//System.out.println(procB.directory());
 procB.redirectErrorStream(true);
 Process p = procB.start();
 
@@ -29,4 +64,6 @@ while((str = brInput.readLine()) != null)
 {
 	out.println("output Line : "+str);
 }
+
+
 %>
